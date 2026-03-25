@@ -1,20 +1,23 @@
 package com.bridgelabz.EmployeePayrollApp.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 public class EmployeeDTO {
 
-    @NotBlank(message = "Name should not be empty")
+    @NotEmpty(message = "Employee name cannot be empty")
+    @Pattern(
+            regexp = "^[A-Z][a-zA-Z\\s]{2,}$",
+            message = "Employee name must start with a capital letter and have at least 3 characters"
+    )
     private String name;
 
-    @Min(value = 500, message = "Salary should be at least 500")
-    private long salary;
+    private double salary;
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String name, long salary) {
+    public EmployeeDTO(String name, double salary) {
         this.name = name;
         this.salary = salary;
     }
@@ -23,15 +26,15 @@ public class EmployeeDTO {
         return name;
     }
 
-    public long getSalary() {
-        return salary;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setSalary(long salary) {
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }
