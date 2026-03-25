@@ -25,4 +25,13 @@ public class EmployeePayrollExceptionHandler {
         ResponseDTO responseDTO = new ResponseDTO("Validation Failed", errorMap);
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EmployeePayrollException.class)
+    public ResponseEntity<ResponseDTO> handleEmployeePayrollException(
+            EmployeePayrollException ex) {
+
+        ResponseDTO responseDTO =
+                new ResponseDTO("Exception while processing REST Request", ex.getMessage());
+        return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+    }
 }
